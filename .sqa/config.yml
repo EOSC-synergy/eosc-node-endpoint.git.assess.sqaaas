@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/madgeek-arc/eosc-node-endpoint:
+      branch: main
+      repo: https://github.com/madgeek-arc/eosc-node-endpoint.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint git:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-goldenrod-harrier.sh
+        container: qc.acc_craggy-cerulean-kingfisher
+  QC.Doc:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-silver-cockroach.sh
+        container: qc.doc_surly-ivory-coyote
+      github.com/madgeek-arc/eosc-node-endpoint git:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-alizarin-mau.sh
+        container: qc.doc_wiggy-ecru-grouse
+      github.com/madgeek-arc/eosc-node-endpoint markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-black-booby.sh
+        container: qc.doc_gimpy-zucchini-snake
+  QC.Lic:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-puce-gharial.sh
+        container: qc.lic_chummy-asparagus-fox
+  QC.Sty:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-bronze-gecko.sh
+        container: qc.sty_lanky-ivory-deer
+      github.com/madgeek-arc/eosc-node-endpoint jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-violet-seal.sh
+        container: qc.sty_snoopy-seashell-sheepdog
+  QC.Ver:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.baggy-silver-lionfish.sh
+        container: qc.ver_nerdy-cinnamon-akbash
+timeout: 5400
